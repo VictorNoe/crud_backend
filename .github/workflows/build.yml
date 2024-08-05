@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r get_all_data_vehicle/requirements.txt
+          pip install -r insert_data_vehicle/requirements.txt
+          pip install -r update_data_vehicle/requirements.txt
+          pip install -r delete_data_vehicle/requirements.txt
       - name: Install AWS CLI
         run: |
           sudo apt-get update
