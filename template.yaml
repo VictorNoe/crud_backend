@@ -32,7 +32,7 @@ Resources:
                   - logs:PutLogEvents
                 Resource: arn:aws:logs:*:*:*
 
-  VictorApi:
+  VehiclesApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
