@@ -42,7 +42,7 @@ Resources:
         AllowHeaders: "'*'"
         AllowMethods: "'OPTIONS,POST,GET,PUT,DELETE'"
 
-  GetVehicleFunction:
+  GetDataVehicleFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: get/
@@ -57,6 +57,7 @@ Resources:
             RestApiId: !Ref VehiclesApi
             Path: /get
             Method: get
+
 Outputs:
   GetVehicleApi:
     Description: "API Gateway endpoint URL with path get for Prod stage to GetVehicle function"
@@ -64,7 +65,7 @@ Outputs:
 
   GetVehicleFunction:
     Description: "GetVehicleInfo Lambda Function ARN"
-    Value: !GetAtt GetVehicleFunction.Arn
+    Value: !GetAtt GetDataVehicleFunction.Arn
 
   LambdaExecutionRoleArn:
     Description: "Lambda Execution Role ARN"
