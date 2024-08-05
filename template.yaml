@@ -45,7 +45,7 @@ Resources:
   GetDataVehicleFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: get/
+      CodeUri: get_all_data_vehicle/
       Handler: app.lambda_handler
       Runtime: python3.12
       Policies:
@@ -55,13 +55,13 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref VehiclesApi
-            Path: /get
+            Path: /get_all_data_vehicle
             Method: get
 
 Outputs:
   GetVehicleApi:
-    Description: "API Gateway endpoint URL with path get for Prod stage to GetVehicle function"
-    Value: !Sub "https://${VehiclesApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
+    Description: "API Gateway endpoint URL with path get_all_data_vehicle for Prod stage to GetVehicle function"
+    Value: !Sub "https://${VehiclesApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get_all_data_vehicle/"
 
   GetVehicleFunction:
     Description: "GetVehicleInfo Lambda Function ARN"
