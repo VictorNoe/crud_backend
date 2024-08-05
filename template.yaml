@@ -36,13 +36,13 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Name: VictorApi
+      Name: VehiclesApi
       Cors:
         AllowOrigin: "'*'"
         AllowHeaders: "'*'"
         AllowMethods: "'OPTIONS,POST,GET,PUT,DELETE'"
 
-  GetInfoFunction:
+  GetVehicleFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: get/
@@ -54,17 +54,17 @@ Resources:
         GetResource:
           Type: Api
           Properties:
-            RestApiId: !Ref VictorApi
+            RestApiId: !Ref VehiclesApi
             Path: /get
             Method: get
 Outputs:
-  GetInfoApi:
-    Description: "API Gateway endpoint URL for Prod stage for GetInfo function"
-    Value: !Sub "https://${VictorApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
+  GetVehicleApi:
+    Description: "API Gateway endpoint URL with path get for Prod stage to GetVehicle function"
+    Value: !Sub "https://${VehiclesApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
 
-  GetInfoFunction:
-    Description: "GetInfo Lambda Function ARN"
-    Value: !GetAtt GetInfoFunction.Arn
+  GetVehicleFunction:
+    Description: "GetVehicleInfo Lambda Function ARN"
+    Value: !GetAtt GetVehicleFunction.Arn
 
   LambdaExecutionRoleArn:
     Description: "Lambda Execution Role ARN"
