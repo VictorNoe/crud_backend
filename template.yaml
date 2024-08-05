@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  crud_backend
+
+  Sample SAM Template for crud_backend
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaBasicExecution
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+
+  VictorApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Name: VictorApi
+      Cors:
+        AllowOrigin: "'*'"
+        AllowHeaders: "'*'"
+        AllowMethods: "'OPTIONS,POST,GET,PUT,DELETE'"
+
+  GetInfoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: get/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            RestApiId: !Ref VictorApi
+            Path: /get
+            Method: get
+Outputs:
+  GetInfoApi:
+    Description: "API Gateway endpoint URL for Prod stage for GetInfo function"
+    Value: !Sub "https://${VictorApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
+
+  GetInfoFunction:
+    Description: "GetInfo Lambda Function ARN"
+    Value: !GetAtt GetInfoFunction.Arn
+
+  LambdaExecutionRoleArn:
+    Description: "Lambda Execution Role ARN"
+    Value: !GetAtt LambdaExecutionRole.Arn
+
