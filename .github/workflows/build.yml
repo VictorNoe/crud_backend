@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r get/requirements.txt
-          pip install -r create/requirements.txt
-          pip install -r update/requirements.txt
-          pip install -r delete/requirements.txt
       - name: Install AWS CLI
         run: |
           sudo apt-get update
