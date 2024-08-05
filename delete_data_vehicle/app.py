@@ -11,7 +11,9 @@ def lambda_handler(event, context):
 
     try:
         with connection.cursor() as cursor:
-            vehicle_id = event['queryStringParameters']['id']
+            body = json.loads(event['body'])
+            vehicle_id = body['id']
+
             sql = "DELETE FROM vehiculos WHERE id = %s"
             cursor.execute(sql, (vehicle_id,))
             connection.commit()
