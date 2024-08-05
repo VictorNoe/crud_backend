@@ -19,11 +19,11 @@ def lambda_handler(event, context):
 
             for row in result:
                 car = {
-                    'id_rate': row[0],
-                    'value': row[1],
-                    'comment': row[2],
-                    'id_auto': row[3],
-                    'id_user': row[4]
+                    'id': row[0],
+                    'marca': row[1],
+                    'modelo': row[2],
+                    'velocidadMaxima': row[3],
+                    'autonomia': row[4]
                 }
                 vehicles.append(car)
 
