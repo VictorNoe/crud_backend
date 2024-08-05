@@ -37,5 +37,5 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
         },
-        "body": json.dumps({vehicles}),
+        "body": json.dumps(vehicles),
     }
